@@ -4,19 +4,29 @@ import { PrismaClient } from "./generated/prisma";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("در حال آپدیت کردن نام یک کاربر...");
+  console.log("در حال حذف یک کاربر...");
 
-  const updatedUser = await prisma.user.update({
+  const deletedUser = await prisma.user.delete({
     where: {
-      email: "ali.ahmadi@example.com", // کاربری که می‌خواهیم آپدیت کنیم
-    },
-    data: {
-      name: "Ali Ahmadi (Updated Name)", // مقدار جدید برای فیلد name
+      email: "ali.ahmadi@example.com", // ایمیل کاربری که می‌خواهیم حذف کنیم
     },
   });
 
-  console.log("کاربر با موفقیت آپدیت شد:");
-  console.log(updatedUser);
+  console.log("کاربر با موفقیت حذف شد:");
+  console.log(deletedUser);
+  // console.log("در حال آپدیت کردن نام یک کاربر...");
+
+  // const updatedUser = await prisma.user.update({
+  //   where: {
+  //     email: "ali.ahmadi@example.com", // کاربری که می‌خواهیم آپدیت کنیم
+  //   },
+  //   data: {
+  //     name: "Ali Ahmadi (Updated Name)", // مقدار جدید برای فیلد name
+  //   },
+  // });
+
+  // console.log("کاربر با موفقیت آپدیت شد:");
+  // console.log(updatedUser);
   // // 1. پیدا کردن همه کاربران
   // console.log("در حال دریافت لیست همه کاربران...");
   // const allUsers = await prisma.user.findMany();
