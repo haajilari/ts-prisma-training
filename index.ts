@@ -4,16 +4,25 @@ import { PrismaClient } from "./generated/prisma";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("در حال حذف یک کاربر...");
-
-  const deletedUser = await prisma.user.delete({
-    where: {
-      email: "ali.ahmadi@example.com", // ایمیل کاربری که می‌خواهیم حذف کنیم
-    },
+  await prisma.user.createMany({
+    data: [
+      { email: "reza@example.com", name: "Reza Tehrani" },
+      { email: "sara@example.com", name: "Sara Mohammadi" },
+      { email: "maryam@example.com", name: "Maryam Jafari" },
+    ],
+    skipDuplicates: true, // از خطای ایمیل تکراری جلوگیری می‌کنه
   });
+  console.log("کاربران جدید اضافه شدند.");
+  // console.log("در حال حذف یک کاربر...");
 
-  console.log("کاربر با موفقیت حذف شد:");
-  console.log(deletedUser);
+  // const deletedUser = await prisma.user.delete({
+  //   where: {
+  //     email: "ali.ahmadi@example.com", // ایمیل کاربری که می‌خواهیم حذف کنیم
+  //   },
+  // });
+
+  // console.log("کاربر با موفقیت حذف شد:");
+  // console.log(deletedUser);
   // console.log("در حال آپدیت کردن نام یک کاربر...");
 
   // const updatedUser = await prisma.user.update({
